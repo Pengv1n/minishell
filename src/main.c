@@ -14,6 +14,18 @@ void	free_env(t_env *env)
 	}
 }
 
+void	free_msh(t_msh *msh)
+{
+	if (msh)
+	{
+		if (msh->pwd)
+			free(msh->pwd);
+		if (msh->old_pwd)
+			free(msh->old_pwd);
+		free(msh);
+	}
+}
+
 t_env	*find_env(t_env *env, char *data)
 {
 	int	len;
@@ -60,15 +72,33 @@ void	edit_env(t_env **env)
 	}
 }
 
-void	pwd()
+void	pwd(t_msh *msh, t_env *env)
+{
+	t_env	*f_pwd;
+
+	msh->pwd = NULL;
+	msh->old_pwd = NULL;
+	f_pwd = find_env(env, "PWD=");
+	if (f_pwd)
+		msh->pwd = ft_strdup(f_pwd->data + 4);
+	f_pwd = find_env(env, "OLDPWD=");
+	if (f_pwd)
+		msh->old_pwd = ft_strdup(f_pwd->data + 7);
+}
 
 int	main(int argc, char **argv, char **envm)
 {
 	t_env	*env;
 	t_env	*tmp;
+	t_msh	*msh;
 
+	msh = (t_msh *) malloc(sizeof(t_msh));
+	if (!msh)
+		exit(EXIT_FAILURE);
 	env = crt_env(envm);
 	edit_env(&env);
+	pwd(msh, env);
+
 	tmp = env;
 	while (tmp->next)
 	{
@@ -76,5 +106,6 @@ int	main(int argc, char **argv, char **envm)
 		tmp = tmp->next;
 	}
 	free_env(env);
+	free_msh(msh);
 	return (0);
 }
