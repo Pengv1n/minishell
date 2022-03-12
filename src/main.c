@@ -17,12 +17,14 @@ void	free_env(t_env *env)
 int	main(int argc, char **argv, char **envm)
 {
 	t_env	*env;
+	t_env	*tmp;
 
 	env = crt_env(envm);
-	while (env->next)
+	tmp = env;
+	while (tmp->next)
 	{
-		printf("%s\n", env->data);
-		env = env->next;
+		printf("%s\n", tmp->data);
+		tmp = tmp->next;
 	}
 	free_env(env);
 	return (0);
