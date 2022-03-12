@@ -3,6 +3,12 @@
 
 #include "../libft/libft.h"
 
+typedef struct s_msh
+{
+	char	*pwd;
+	char	*old_pwd;
+} t_msh;
+
 typedef struct s_env
 {
     char    *data;
