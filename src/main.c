@@ -86,12 +86,24 @@ void	pwd(t_msh *msh, t_env *env)
 		msh->old_pwd = ft_strdup(f_pwd->data + 7);
 }
 
-void	handler_command(t_msh *msh, t_env env)
+void	handler_command(t_msh *msh, t_env *env)
 {
 	char	*command;
 
-	cmd = readline("minishell$ ");
-
+	command = readline("minishell$ ");
+	if (!command)
+	{
+		ft_putendl_fd("exit", 1);
+		if (WIFSIGNALED(g_return_code))
+			exit(EXIT_FAILURE);
+		else
+			exit(EXIT_SUCCESS);
+	}
+	if (ft_strlen(command) > 0)
+		add_history(command);
+	if (*command)
+		parse_command(command, msh, env);
+	free(command);
 }
 
 int	main(int argc, char **argv, char **envm)

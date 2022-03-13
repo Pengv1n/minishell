@@ -4,6 +4,7 @@
 #include "../libft/libft.h"
 #include "signal.h"
 #include "readline/readline.h"
+#include "readline/history.h"
 
 int	g_return_code;
 
@@ -19,10 +20,13 @@ typedef struct s_env
     struct s_env   *next;
 } t_env;
 
+typedef struct s_
+
 t_env	*crt_env(char **env);
 void	add_back_env(t_env **env, t_env *new);
 t_env	*lst_end(t_env *env);
 t_env	*new_env(char *data);
 void	sig_msh(void);
+void	parse_command(char *cmd, t_msh *msh, t_env *env);
 
 #endif
