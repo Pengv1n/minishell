@@ -20,8 +20,6 @@ typedef struct s_env
     struct s_env   *next;
 } t_env;
 
-typedef struct s_
-
 t_env	*crt_env(char **env);
 void	add_back_env(t_env **env, t_env *new);
 t_env	*lst_end(t_env *env);

@@ -120,7 +120,7 @@ int	main(int argc, char **argv, char **envm)
 	pwd(msh, env);
 	while (1)
 	{
-		sig_msh();
+//		sig_msh();
 		handler_command(msh, env);
 	}
 
