@@ -86,6 +86,14 @@ void	pwd(t_msh *msh, t_env *env)
 		msh->old_pwd = ft_strdup(f_pwd->data + 7);
 }
 
+void	handler_command(t_msh *msh, t_env env)
+{
+	char	*command;
+
+	cmd = readline("minishell$ ");
+
+}
+
 int	main(int argc, char **argv, char **envm)
 {
 	t_env	*env;
@@ -98,6 +106,11 @@ int	main(int argc, char **argv, char **envm)
 	env = crt_env(envm);
 	edit_env(&env);
 	pwd(msh, env);
+	while (1)
+	{
+		sig_msh();
+		handler_command(msh, env);
+	}
 
 	tmp = env;
 	while (tmp->next)
