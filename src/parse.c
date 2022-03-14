@@ -68,7 +68,7 @@ void	split_cmd(char *cmd, t_list **cmd_data)
 	i = 0;
 	cmd = ft_strtrim(cmd, " \t\v\b\r");
 	tmp = cmd;
-	if (!cmd)
+	if (!*cmd)
 	{
 		free(cmd);
 		return ;
@@ -94,14 +94,15 @@ void	parse_command(char *command, t_msh *msh, t_env *env)
 	t_list	*cmd_data;
 	t_list	*tmp;
 
+	cmd_data = NULL;
 	split_cmd(command, &cmd_data);
 
-//	tmp = cmd_data;
-//	while (cmd_data)
-//	{
-//		printf("%s\n", cmd_data->content);
-//		cmd_data = cmd_data->next;
-//	}
-//
-	ft_lstclear(&cmd_data, (void *)free);
+	tmp = cmd_data;
+	while (cmd_data)
+	{
+		printf("%s\n", cmd_data->content);
+		cmd_data = cmd_data->next;
+	}
+
+	ft_lstclear(&tmp, (void *)free);
 }

@@ -122,14 +122,16 @@ int	main(int argc, char **argv, char **envm)
 	{
 //		sig_msh();
 		handler_command(msh, env);
+		break ;
 	}
 
-	tmp = env;
-	while (tmp->next)
-	{
-		printf("%s\n", tmp->data);
-		tmp = tmp->next;
-	}
+//	tmp = env;
+//	while (tmp->next)
+//	{
+//		printf("%s\n", tmp->data);
+//		tmp = tmp->next;
+//	}
+	rl_clear_history();
 	free_env(env);
 	free_msh(msh);
 	return (0);
