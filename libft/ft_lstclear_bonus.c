@@ -26,6 +26,8 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 		tmp = (*lst)->next;
 		if ((*lst)->content)
 			del((*lst)->content);
+		if ((*lst)->amb_data)
+			del((*lst)->amb_data);
 		(*lst)->content = NULL;
 		del(*lst);
 		*lst = NULL;

@@ -89,6 +89,24 @@ void	split_cmd(char *cmd, t_list **cmd_data)
 	free(tmp);
 }
 
+void	init_cmd_data(t_list *cmd_data)
+{
+	int	i;
+
+	i = 0;
+	while (cmd_data)
+	{
+		cmd_data->flag_not_change_dollars = 0;
+		cmd_data->flag_ambitious_redirect = 0;
+		cmd_data->flag_dollar_expanded = 0;
+		cmd_data->flag_in_quotes = 0;
+		cmd_data->amb_data = NULL;
+		cmd_data->num = i;
+		cmd_data = cmd_data->next;
+		i++;
+	}
+}
+
 void	parse_command(char *command, t_msh *msh, t_env *env)
 {
 	t_list	*cmd_data;
@@ -96,13 +114,11 @@ void	parse_command(char *command, t_msh *msh, t_env *env)
 
 	cmd_data = NULL;
 	split_cmd(command, &cmd_data);
+	if (!cmd_data)
+		return ;
+	init_cmd_data(cmd_data);
+	check_if_path_not_expand(cmd_data, env);
 
-	tmp = cmd_data;
-	while (cmd_data)
-	{
-		printf("%s\n", cmd_data->content);
-		cmd_data = cmd_data->next;
-	}
 
-	ft_lstclear(&tmp, (void *)free);
+	ft_lstclear(&cmd_data, (void *)free);
 }

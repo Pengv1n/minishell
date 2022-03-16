@@ -20,7 +20,12 @@
 typedef struct s_list
 {
 	int	shlvl;
-
+	int	flag_not_change_dollars;
+	int	flag_in_quotes;
+	int	flag_ambitious_redirect;
+	char	*amb_data;
+	int	flag_dollar_expanded;
+	int	num;
 	char			*content;
 	struct s_list	*next;
 }	t_list;
