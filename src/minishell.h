@@ -27,5 +27,9 @@ t_env	*new_env(char *data);
 void	sig_msh(void);
 void	parse_command(char *cmd, t_msh *msh, t_env *env);
 void	check_if_path_not_expand(t_list *cmd_data, t_env *env);
+int	check_path(int i, char *str);
+int	check_path_data(t_list *cmd_data, int i, char *data, t_env *env);
+char	*check_in_env(char *cmd, t_env *env);
+void	clean_commands(t_list *cmd_data, t_env *env);
 
 #endif

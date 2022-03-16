@@ -2,28 +2,9 @@
 
 int	check_path(int i, char *str)
 {
-	while (str[i] && (ft_isalnum((int)str[i]) || str[i] == '_'))
+	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
 		i++;
 	return (i);
-}
-
-char	*check_in_env(char *cmd, t_env *env)
-{
-	int	len;
-	char	*new_data;
-
-	len = ft_strlen(cmd);
-	while (env)
-	{
-		if (!ft_strncmp(cmd, env->data, len) && env->data[len] == '=')
-		{
-			new_data = ft_memchr(env->data, '=', ft_strlen(env->data));
-			new_data++;
-			return (ft_strdup(new_data));
-		}
-		env = env->next;
-	}
-	return (NULL);
 }
 
 void	check_cmd(t_list **cmd_data, t_env *env)
