@@ -64,7 +64,7 @@ int	delete_two_quote(t_list *cmd_data, int i, char *data, t_env *env)
 	if (!data[j])
 		return (i + 1);
 	j = i + 1;
-	while (data[j] && data[i] != '\"')
+	while (data[j] && data[j] != '\"')
 	{
 		if (data[j] == '$')
 		{

@@ -119,13 +119,18 @@ void	parse_command(char *command, t_msh *msh, t_env *env)
 	init_cmd_data(cmd_data);
 	check_if_path_not_expand(cmd_data, env);
 	clean_commands(cmd_data, env);
-
-	tmp = cmd_data;
-	while (tmp)
-	{
-		printf("%s\n", tmp->content);
-		tmp = tmp->next;
-	}
+    if (check_syntax_error(cmd_data))
+    {
+        g_return_code = 258;
+        ft_lstclear(&cmd_data, (void *)free);
+        return ;
+    }
+//	tmp = cmd_data;
+//	while (tmp)
+//	{
+//		printf("%s\n", tmp->content);
+//		tmp = tmp->next;
+//	}
 
 	ft_lstclear(&cmd_data, (void *)free);
 }

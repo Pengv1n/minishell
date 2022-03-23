@@ -75,8 +75,8 @@ int	data_change_path(t_list *cmd_data, int i, char *data, t_env *env)
 	if (new)
 		free(new);
 	free(tmp1);
+    tmp1 = ft_strdup(data + i);
 	free(cmd_data->content);
-	tmp1 = ft_strdup(data + i);
 	cmd_data->content = ft_strjoin(tmp2, tmp1);
 	free(tmp1);
 	free(tmp2);
