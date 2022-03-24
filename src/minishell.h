@@ -5,6 +5,8 @@
 #include "signal.h"
 #include "readline/readline.h"
 #include "readline/history.h"
+#include "fcntl.h"
+#include "sys/wait.h"
 
 int	g_return_code;
 
@@ -47,5 +49,8 @@ int	check_syntax_error(t_list *cmd_data);
 int	check_repited_redirect(t_list *cmd_data);
 int	init_cmd_struct(t_list *cmd_data, t_cmd **s, t_msh *msh);
 void	fill_list_cmd_struct(t_list *cmd_data, t_cmd *s);
+void	signal_for_heredoc(void);
+void	ignore_signals(void);
+void	heredoc(t_list *cmd_data, t_cmd *s);
 
 #endif

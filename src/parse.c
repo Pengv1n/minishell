@@ -126,7 +126,7 @@ void	parse_command(char *command, t_msh *msh, t_env *env)
         ft_lstclear(&cmd_data, (void *)free);
         return ;
     }
-    if (!init_cmd_data(cmd_data, &s, msh))
+    if (!init_cmd_struct(cmd_data, &s, msh))
         return ;
     fill_list_cmd_struct(cmd_data, s);
 
