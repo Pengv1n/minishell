@@ -49,7 +49,7 @@ void	open_file_for_heredoc(t_cmd *s)
 	}
 	else
 	{
-		s->in = open (str, O_RDWR | O_CREAT | O_APPEND, 0644);
+		s->in = open(str, O_RDWR | O_CREAT | O_APPEND, 0644);
 		if (s->in < 0)
 			exit(EXIT_FAILURE);
 		s->hr_name = ft_strdup(str);

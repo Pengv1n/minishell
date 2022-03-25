@@ -114,6 +114,7 @@ void	parse_command(char *command, t_msh *msh, t_env *env)
 	t_list	*tmp;
 
 	cmd_data = NULL;
+	s = NULL;
 	split_cmd(command, &cmd_data);
 	if (!cmd_data)
 		return ;
@@ -138,4 +139,5 @@ void	parse_command(char *command, t_msh *msh, t_env *env)
 //	}
 
 	ft_lstclear(&cmd_data, (void *)free);
+	clear_list_cmd_struct(&s);
 }

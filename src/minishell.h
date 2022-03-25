@@ -7,6 +7,8 @@
 #include "readline/history.h"
 #include "fcntl.h"
 #include "sys/wait.h"
+#include "string.h"
+#include "errno.h"
 
 int	g_return_code;
 
@@ -52,5 +54,14 @@ void	fill_list_cmd_struct(t_list *cmd_data, t_cmd *s);
 void	signal_for_heredoc(void);
 void	ignore_signals(void);
 void	heredoc(t_list *cmd_data, t_cmd *s);
+void	clear_list_cmd_struct(t_cmd **s);
+int	data_is_pipe(t_list *cmd_data);
+t_list	*error_ambitious_data(t_list *cmd_data, t_cmd *s);
+void	made_redirect(t_list *cmd_data, t_cmd *s);
+int	data_redirect_in(t_list *cmd_data);
+int	data_redirect_out(t_list *cmd_data);
+t_list	*error_with_redirect(t_list *cmd_data, t_cmd *s);
+int	check_if_not_last_redirect_in(t_list *cmd_data);
+int	check_if_not_last_redirect_out(t_list *cmd_data);
 
 #endif
