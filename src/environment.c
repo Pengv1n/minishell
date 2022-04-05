@@ -46,3 +46,34 @@ t_env	*crt_env(char **env)
 	}
 	return (e);
 }
+
+int	size_env(t_env *env)
+{
+	int	ret;
+
+	ret = 0;
+	while (env)
+	{
+		env = env->next;
+		ret++;
+	}
+	return (ret);
+}
+
+t_env	*find_env_data(t_env *env, char *data)
+{
+	int len;
+
+	if (ft_strchr(data, '='))
+		len = ft_strchr_len(data, '=');
+	else
+		len = ft_strlen(data);
+	while (env)
+	{
+		if (!ft_strncmp(data, env->data, len)
+			&& (env->data[len] == '=' || !env->data[len]))
+			return (env);
+		env = env->next;
+	}
+	return (NULL);
+}

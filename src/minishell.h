@@ -36,9 +36,21 @@ typedef struct s_env
     struct s_env   *next;
 } t_env;
 
+typedef	struct s_pipe
+{
+	char	**com;
+	char	**cmd;
+	char	**path;
+	int	**fds;
+	int	*pids;
+	int	size;
+	int	hd;
+}	t_pipe;
+
 t_env	*crt_env(char **env);
 void	add_back_env(t_env **env, t_env *new);
 t_env	*lst_end(t_env *env);
+int	size_env(t_env *env);
 t_env	*new_env(char *data);
 void	sig_msh(void);
 void	parse_command(char *cmd, t_msh *msh, t_env *env);
@@ -63,5 +75,14 @@ int	data_redirect_out(t_list *cmd_data);
 t_list	*error_with_redirect(t_list *cmd_data, t_cmd *s);
 int	check_if_not_last_redirect_in(t_list *cmd_data);
 int	check_if_not_last_redirect_out(t_list *cmd_data);
+void	pipex(t_cmd *s, t_msh *msh, t_env *env);
+int	ft_strchr_len(const char *s, int c);
+t_env	*find_env_data(t_env *env, char *data);
+void	made_new_minishell(t_env *env);
+void	error(int n, char *str);
+void	close_inout(t_cmd *s);
+int	check_if_build_in_or_null(t_env **env, t_cmd *s, t_msh *msh, int flag);
+char	**build_envp(t_env *env);
+void	child_signals(void);
 
 #endif

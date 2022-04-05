@@ -130,6 +130,7 @@ void	parse_command(char *command, t_msh *msh, t_env *env)
     if (!init_cmd_struct(cmd_data, &s, msh))
         return ;
     fill_list_cmd_struct(cmd_data, s);
+	pipex(s, msh, env);
 
 //	tmp = cmd_data;
 //	while (tmp)

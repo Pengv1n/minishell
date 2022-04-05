@@ -37,3 +37,18 @@ void	clear_list_cmd_struct(t_cmd **s)
 	}
 	*s = NULL;
 }
+
+int	ft_strchr_len(const char *s, int c)
+{
+	int		i;
+
+	i = 0;
+	while (*s)
+	{
+		if (*s == c)
+			return (i);
+		s++;
+		i++;
+	}
+	return (-1);
+}
