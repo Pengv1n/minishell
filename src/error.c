@@ -21,3 +21,14 @@ void	error(int n, char *str)
 	}
 	exit(EXIT_FAILURE);
 }
+
+void	error_with_std_function(int n)
+{
+	if (n >= 1 && n <= 15)
+		ft_putstr_fd("error with malloc\n", 2);
+	if (n == 20)
+		ft_putstr_fd("Error: can't create a pipe\n", 2);
+	if (n == 21)
+		ft_putstr_fd("Can't make a fork\n", 2);
+	exit (n);
+}

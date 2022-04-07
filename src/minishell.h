@@ -84,5 +84,11 @@ void	close_inout(t_cmd *s);
 int	check_if_build_in_or_null(t_env **env, t_cmd *s, t_msh *msh, int flag);
 char	**build_envp(t_env *env);
 void	child_signals(void);
+void	if_no_first_command(t_cmd *s);
+void	free_double_massive(char **data);
+char	*add_dir(t_pipe *descriptor, char **cmd, char **envp);
+void	signal_for_main_with_fork(void);
+void	error_with_std_function(int n);
+void	count_pipes(t_pipe *pipex, t_msh *msh);
 
 #endif
