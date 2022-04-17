@@ -1,12 +1,5 @@
 #include "minishell.h"
 
-void	multiple_commands(t_env **env, t_cmd *s, t_msh *msh, t_pipe *pipex)
-{
-	int	count;
-
-
-}
-
 void	waitpid_and_return(t_pipe *pipex, int count)
 {
 	int	sig;
@@ -15,6 +8,24 @@ void	waitpid_and_return(t_pipe *pipex, int count)
 	g_return_code = WEXITSTATUS(sig);
 	if (!g_return_code && WIFSIGNALED(sig))
 		g_return_code = 128 + WTERMSIG(sig);
+}
+
+void	multiple_commands(t_env **env, t_cmd *s, t_msh *msh, t_pipe *pipex)
+{
+	int	count;
+
+	count_pipes(pipex, msh);
+	child_process(pipex, s, msh, env);
+	close_fd(pipex->fds);
+	close_inout(s);
+	count = -1;
+	signal_for_main_with_fork();
+	while (pipex->size-- > 0)
+		waitpid_and_return(pipex, ++count);
+	count = -1;
+	while (pipex->fds[++count])
+		free(pipex->fds[count]);
+	free(pipex->fds);
 }
 
 void	check_fds(t_cmd *s)
@@ -87,4 +98,7 @@ void	pipex(t_cmd *s, t_msh *msh, t_env *env)
 	if (msh->amount == 1)
 		single_command(&env, s, msh, pipex);
 	else
+		multiple_commands(&env, s, msh, &pipex);
+	free(pipex.com);
+	free(pipex.pids);
 }

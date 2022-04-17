@@ -94,10 +94,7 @@ void	handler_command(t_msh *msh, t_env *env)
 	if (!command)
 	{
 		ft_putendl_fd("exit", 1);
-		if (WIFSIGNALED(g_return_code))
-			exit(EXIT_FAILURE);
-		else
-			exit(EXIT_SUCCESS);
+		exit_minishell()
 	}
 	if (ft_strlen(command) > 0)
 		add_history(command);
@@ -114,7 +111,7 @@ int	main(int argc, char **argv, char **envm)
 
 	msh = (t_msh *) malloc(sizeof(t_msh));
 	if (!msh)
-		exit(EXIT_FAILURE);
+		error_with_std_function(1);
 	env = crt_env(envm);
 	edit_env(&env);
 	pwd(msh, env);

@@ -32,3 +32,11 @@ void	error_with_std_function(int n)
 		ft_putstr_fd("Can't make a fork\n", 2);
 	exit (n);
 }
+
+void	exit_minishell(void)
+{
+	if (WIFSIGNALED(g_return_code))
+		exit(1);
+	else
+		exit(EXIT_SUCCESS);
+}

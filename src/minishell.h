@@ -90,5 +90,12 @@ char	*add_dir(t_pipe *descriptor, char **cmd, char **envp);
 void	signal_for_main_with_fork(void);
 void	error_with_std_function(int n);
 void	count_pipes(t_pipe *pipex, t_msh *msh);
+void	exit_minishell(void);
+void	add_command_and_args(t_list *cmd_data, t_cmd *s);
+int	data_redirect_and_heredoc(t_list *cmd_data);
+void	add_command_and_args(t_list *cmd_data, t_cmd *s);
+void	close_fd(int **fds);
+void	choose_build_in_function(t_env **env, t_cmd *s, t_msh *msh, int flag);
+void	child_process(t_pipe *pipex, t_cmd *s, t_msh *msh, t_env **env);
 
 #endif

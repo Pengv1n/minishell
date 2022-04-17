@@ -1,5 +1,18 @@
 #include "minishell.h"
 
+int	data_redirect_and_heredoc(t_list *cmd_data)
+{
+	char	*tmp;
+
+	tmp = cmd_data->content;
+	if (cmd_data->flag_in_quotes)
+		return (0);
+	if (!ft_strncmp(tmp, ">", 2) || !ft_strncmp(tmp. "<", 2)
+		|| !ft_strncmp(tmp, ">>", 3) || !ft_strncmp(tmp, "<<", 3))
+		return (1);
+	return (0);
+}
+
 void	free_double_massive(char **data)
 {
 	int	i;
