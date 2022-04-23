@@ -94,7 +94,7 @@ void	handler_command(t_msh *msh, t_env *env)
 	if (!command)
 	{
 		ft_putendl_fd("exit", 1);
-		exit_minishell()
+		exit_minishell();
 	}
 	if (ft_strlen(command) > 0)
 		add_history(command);
@@ -117,7 +117,7 @@ int	main(int argc, char **argv, char **envm)
 	pwd(msh, env);
 	while (1)
 	{
-//		sig_msh();
+		sig_msh();
 		handler_command(msh, env);
 		break ;
 	}

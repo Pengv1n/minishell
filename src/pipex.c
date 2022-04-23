@@ -96,7 +96,7 @@ void	pipex(t_cmd *s, t_msh *msh, t_env *env)
 	}
 	alloc_pipex(&pipex, msh);
 	if (msh->amount == 1)
-		single_command(&env, s, msh, pipex);
+		single_command(&env, s, msh, &pipex);
 	else
 		multiple_commands(&env, s, msh, &pipex);
 	free(pipex.com);

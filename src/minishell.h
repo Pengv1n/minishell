@@ -97,5 +97,18 @@ void	add_command_and_args(t_list *cmd_data, t_cmd *s);
 void	close_fd(int **fds);
 void	choose_build_in_function(t_env **env, t_cmd *s, t_msh *msh, int flag);
 void	child_process(t_pipe *pipex, t_cmd *s, t_msh *msh, t_env **env);
+void	echo_build_in(t_cmd *s);
+void	pwd_build_in(t_cmd *s, t_msh *msh);
+void	env_build_in(t_env *env, t_cmd *s);
+void	change_data_in_list(t_env *env, char *data);
+void	export_build_in(t_env **env, t_cmd *s);
+int	check_if_str_num(char *data);
+void	exit_build_in(t_cmd *s);
+int	check_for_error_data(char *data, char c);
+static t_env	*copy_env(t_env *env);
+void	unset_build_in(t_cmd *s, t_env **env);
+void	cd_build_in(char **cmd, t_env *env, char *pwd);
+char	*get_address(void);
+void	change_env_pwds(t_msh *msh, t_env *env);
 
 #endif
