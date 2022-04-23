@@ -53,7 +53,7 @@ t_env	*lst_end(t_env *env);
 int	size_env(t_env *env);
 t_env	*new_env(char *data);
 void	sig_msh(void);
-void	parse_command(char *cmd, t_msh *msh, t_env *env);
+void	parse_command(char *cmd, t_msh *msh, t_env **env);
 void	check_if_path_not_expand(t_list *cmd_data, t_env *env);
 int	check_path(int i, char *str);
 int	check_path_data(t_list *cmd_data, int i, char *data, t_env *env);

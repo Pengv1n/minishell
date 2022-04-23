@@ -107,11 +107,10 @@ void	init_cmd_data(t_list *cmd_data)
 	}
 }
 
-void	parse_command(char *command, t_msh *msh, t_env *env)
+void	parse_command(char *command, t_msh *msh, t_env **env)
 {
 	t_list	*cmd_data;
     t_cmd   *s;
-	t_list	*tmp;
 
 	cmd_data = NULL;
 	s = NULL;
@@ -119,8 +118,8 @@ void	parse_command(char *command, t_msh *msh, t_env *env)
 	if (!cmd_data)
 		return ;
 	init_cmd_data(cmd_data);
-	check_if_path_not_expand(cmd_data, env);
-	clean_commands(cmd_data, env);
+	check_if_path_not_expand(cmd_data, *env);
+	clean_commands(cmd_data, *env);
     if (check_syntax_error(cmd_data) || check_repited_redirect(cmd_data))
     {
         g_return_code = 258;
@@ -130,15 +129,7 @@ void	parse_command(char *command, t_msh *msh, t_env *env)
     if (!init_cmd_struct(cmd_data, &s, msh))
         return ;
     fill_list_cmd_struct(cmd_data, s);
-	pipex(s, msh, env);
-
-//	tmp = cmd_data;
-//	while (tmp)
-//	{
-//		printf("%s\n", tmp->content);
-//		tmp = tmp->next;
-//	}
-
+	pipex(s, msh, *env);
 	ft_lstclear(&cmd_data, (void *)free);
 	clear_list_cmd_struct(&s);
 }

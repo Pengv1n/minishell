@@ -7,7 +7,8 @@ void	free_env(t_env *env)
 
 	while (env)
 	{
-		free(env->data);
+		if (env->data)
+			free(env->data);
 		tmp = env->next;
 		free(env);
 		env = tmp;
@@ -18,11 +19,17 @@ void	free_msh(t_msh *msh)
 {
 	if (msh)
 	{
-		if (msh->pwd)
+		if (msh->pwd) {
 			free(msh->pwd);
+			msh->pwd = NULL;
+		}
 		if (msh->old_pwd)
+		{
 			free(msh->old_pwd);
+			msh->old_pwd =NULL;
+		}
 		free(msh);
+		msh = NULL;
 	}
 }
 
@@ -32,8 +39,7 @@ t_env	*find_env(t_env *env, char *data)
 
 	len = 0;
 	if (ft_strchr(data, '='))
-		while (data[len] && data[len] != '=')
-			len++;
+		len = ft_strchr_len(data, '=');
 	else
 		len = ft_strlen(data);
 	while (env)
@@ -64,12 +70,12 @@ void	edit_env(t_env **env)
 		f_env->data = ft_strjoin("SHLVL=", str_n);
 		free(str_n);
 	}
-	f_env = find_env(*env, "OLDPWD=");
-	if (f_env)
-	{
-		free(f_env->data);
-		f_env->data = ft_strdup("OLDPWD");
-	}
+//	f_env = find_env(*env, "OLDPWD=");
+//	if (f_env)
+//	{
+//		free(f_env->data);
+//		f_env->data = ft_strdup("OLDPWD");
+//	}
 }
 
 void	pwd(t_msh *msh, t_env *env)
@@ -86,7 +92,7 @@ void	pwd(t_msh *msh, t_env *env)
 		msh->old_pwd = ft_strdup(f_pwd->data + 7);
 }
 
-void	handler_command(t_msh *msh, t_env *env)
+void	handler_command(t_msh *msh, t_env **env)
 {
 	char	*command;
 
@@ -106,7 +112,7 @@ void	handler_command(t_msh *msh, t_env *env)
 int	main(int argc, char **argv, char **envm)
 {
 	t_env	*env;
-	t_env	*tmp;
+//	t_env	*tmp;
 	t_msh	*msh;
 
 	msh = (t_msh *) malloc(sizeof(t_msh));
@@ -118,16 +124,9 @@ int	main(int argc, char **argv, char **envm)
 	while (1)
 	{
 		sig_msh();
-		handler_command(msh, env);
-		break ;
+		handler_command(msh, &env);
 	}
 
-//	tmp = env;
-//	while (tmp->next)
-//	{
-//		printf("%s\n", tmp->data);
-//		tmp = tmp->next;
-//	}
 	rl_clear_history();
 	free_env(env);
 	free_msh(msh);

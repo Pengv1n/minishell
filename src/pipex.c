@@ -72,11 +72,11 @@ void	single_command(t_env **env, t_cmd *s, t_msh *msh, t_pipe *pipex)
 
 void	alloc_pipex(t_pipe *pipex, t_msh *msh)
 {
-	pipex->pids = malloc(sizeof(int) * msh->amount + 1);
+	pipex->pids = malloc(sizeof(int) * (msh->amount + 1));
 	if (!pipex->pids)
 		error(1, NULL);
 	pipex->pids[msh->amount] = '\0';
-	pipex->com = malloc(sizeof(char *) * msh->amount + 1);
+	pipex->com = malloc(sizeof(char *) * (msh->amount + 1));
 	if (!pipex->com)
 		error(1, NULL);
 	pipex->com[msh->amount] = "\0";

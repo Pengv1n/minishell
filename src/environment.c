@@ -29,6 +29,7 @@ void	add_back_env(t_env **env, t_env *new)
 	{
 		tmp = lst_end(*env);
 		tmp->next = new;
+		new->next = NULL;
 	}
 }
 
