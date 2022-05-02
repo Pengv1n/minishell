@@ -87,8 +87,7 @@ void	pipex(t_cmd *s, t_msh *msh, t_env *env)
 	t_pipe	pipex;
 
 	ignore_signals();
-	if (s->cmd && s->cmd[0] && (!ft_strncmp(s->cmd[0], "minishell", 10)
-		|| !ft_strncmp(s->cmd[0], "./minishell", 12))
+	if (s->cmd && s->cmd[0] && !ft_strncmp(s->cmd[0], "./minishell", 12)
 		&& msh->amount == 1)
 	{
 		made_new_minishell(env);

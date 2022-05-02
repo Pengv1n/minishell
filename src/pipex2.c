@@ -88,16 +88,10 @@ char	*add_dir(t_pipe *descriptor, char **cmd, char **envp)
 	else
 		add_slsh = ft_strjoin("/", descriptor->cmd[0]);
 	if (!add_slsh)
-	{
-		ft_putstr_fd("error with malloc\n", 2);
-		exit(EXIT_FAILURE);
-	}
+		error_with_std_function(14);
 	dir = check_commands(descriptor, add_slsh);
 	if (!dir)
-	{
-		ft_putstr_fd("error with malloc\n", 2);
-		exit(EXIT_FAILURE);
-	}
+		error_with_std_function(15);
 	return (dir);
 }
 

@@ -2,14 +2,17 @@
 
 void	close_fd(int **fds)
 {
-	int	i;
-	int	j;
+	int	cnt1;
+	int	cnt2;
 
-	i = -1;
-	while (fds[++i])
+	cnt1 = -1;
+	while (fds[++cnt1])
 	{
-		j = -1;
-		while (fds[i][++j])
-			close(fds[i][j]);
+		cnt2 = 0;
+		while (cnt2 < 2 && fds[cnt1][cnt2])
+		{
+			close(fds[cnt1][cnt2]);
+			cnt2++;
+		}
 	}
 }
