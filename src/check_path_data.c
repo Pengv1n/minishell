@@ -54,34 +54,40 @@ char	*check_in_env(char *var, t_env *env)
 	return (NULL);
 }
 
-int	data_change_path(t_list *cmd_data, int i, char *data, t_env *env)
+int	data_change_path(t_list *data, int i, char *str, t_env *env)
 {
-	int	j;
-	char	*tmp1;
+	int		start;
 	char	*tmp2;
 	char	*new;
-	int	len;
+	char	*tmp;
+	int		len;
 
-	j = i;
-	i = check_path(i, data);
-	if (j == i)
+	start = i;
+	i = check_path(i, str);
+	if (start == i)
 		return (i);
-	tmp1 = ft_substr(data, j, i - j);
-	new = check_in_env(tmp1, env);
-	free(tmp1);
-	tmp1 = ft_substr(data, 0, j - 1);
+	tmp = ft_substr(str, start, i - start);
+	new = check_in_env(tmp, env);
+	free(tmp);
+	if (!new)
+	{
+		free(data->content);
+		data->content = ft_strdup("");
+		return (start - 1);
+	}
+	tmp = ft_substr(str, 0, start - 1);
 	len = ft_strlen(new);
-	tmp2 = ft_strjoin(tmp1, new);
-	if (new)
+	tmp2 = ft_strjoin(tmp, new);
+//	if (new)
 		free(new);
-	free(tmp1);
-    tmp1 = ft_strdup(data + i);
-	free(cmd_data->content);
-	cmd_data->content = ft_strjoin(tmp2, tmp1);
-	free(tmp1);
+	free(tmp);
+//	free(data->content);
+	tmp = ft_strdup(str + i);
+	free(data->content);
+	data->content = ft_strjoin(tmp2, tmp);
+	free(tmp);
 	free(tmp2);
-	return (j + len - 1);
-
+	return (start + len - 1);
 }
 
 int	check_path_data(t_list *cmd_data, int i, char *data, t_env *env)
@@ -98,7 +104,7 @@ int	check_path_data(t_list *cmd_data, int i, char *data, t_env *env)
 		i = data_dollar_num(cmd_data, i--, data);
 		return (i);
 	}
-	if (data[i] && (ft_isalnum(data[i]) || data[i] == '_'))
+	if (data[i] && (ft_isalnum((int)data[i]) || data[i] == '_'))
 		i = data_change_path(cmd_data, i, data, env);
 	return (i);
 }

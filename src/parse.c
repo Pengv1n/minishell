@@ -10,15 +10,15 @@ int	check_type(char c)
 
 int	check_quote(char *cmd, int i, char quote)
 {
-	int	j;
+	int	copy;
 
-	j = i;
+	copy = i;
 	while (cmd[++i])
 	{
 		if (cmd[i] == quote)
 			return (i);
 	}
-	return (j);
+	return (copy);
 }
 
 char	*split_spec_symbols(t_list **cmd_data, char *cmd, int i)
@@ -36,27 +36,29 @@ char	*split_spec_symbols(t_list **cmd_data, char *cmd, int i)
 	return (cmd + i);
 }
 
-char	*add_to_list(char *cmd, int i, t_list **cmd_data)
+char	*add_to_list(char *cmd, int i, t_list **data)
 {
-	int	tmp;
+	int		i_copy;
 	char	*new;
 
-	tmp = i;
+	i_copy = i;
+//	printf("\n\n%s i = %i\n\n", cmd, i_copy);
 	if (!cmd[i])
 	{
-		ft_lstadd_back(cmd_data, ft_lstnew(ft_strdup(cmd)));
+		ft_lstadd_back(data, ft_lstnew(ft_strdup(cmd)));
+//		printf("\n\n\n%s\n\n\n", ft_lstlast((*data))->content);
 		return (NULL);
 	}
 	if (cmd[i] == '|' || cmd[i] == '<' || cmd[i] == '>')
 	{
-		new = split_spec_symbols(cmd_data, cmd, i);
+		new = split_spec_symbols(data, cmd, i);
 		while (new && *new == ' ')
 			new++;
 		return (new);
 	}
 	while (cmd[i] && cmd[i] == ' ')
 		i++;
-	ft_lstadd_back(cmd_data, ft_lstnew(ft_substr(cmd, 0 ,tmp)));
+	ft_lstadd_back(data, ft_lstnew(ft_substr(cmd, 0, i_copy)));
 	return (cmd + i);
 }
 

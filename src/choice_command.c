@@ -24,7 +24,7 @@ void	choose_build_in_function(t_env **env, t_cmd *s, t_msh *msh, int flag)
 	}
 	close_inout(s);
 	if (flag == 1)
-		exit(EXIT_FAILURE);
+		exit(EXIT_SUCCESS);
 }
 
 int	check_if_build_in_or_null(t_env **env, t_cmd *s, t_msh *msh, int flag)

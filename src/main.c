@@ -127,7 +127,7 @@ int	main(int argc, char **argv, char **envm)
 		handler_command(msh, &env);
 	}
 
-	rl_clear_history();
+//	rl_clear_history();
 	free_env(env);
 	free_msh(msh);
 	return (0);

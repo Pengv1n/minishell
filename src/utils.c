@@ -53,6 +53,7 @@ void	clear_list_cmd_struct(t_cmd **s)
 		if ((*s)->hr_name)
 		{
 			unlink((*s)->hr_name);
+			free((*s)->hr_name);
 			(*s)->hr_name = NULL;
 		}
 		if ((*s)->cmd)

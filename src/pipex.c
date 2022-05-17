@@ -50,6 +50,7 @@ void	single_command(t_env **env, t_cmd *s, t_msh *msh, t_pipe *pipex)
 {
 	char	**envp;
 
+
 	if (check_if_build_in_or_null(env, s, msh, 1))
 		return ;
 	pipex->pids[0] = fork();

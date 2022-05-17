@@ -40,7 +40,7 @@ void	sort_export_data(t_env *env, t_cmd *s)
 		b = 0;
 		while (data[b])
 		{
-			if (ft_strncmp(data[b], data[b + 1], ft_strlen(data[b])) < 0)
+			if (ft_strncmp(data[b], data[b + 1], ft_strlen(data[b])) > 0)
 			{
 				temp = data[b];
 				data[b] = data[b + 1];
