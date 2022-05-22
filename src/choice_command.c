@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   choice_command.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eestelle <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/22 17:59:56 by eestelle          #+#    #+#             */
+/*   Updated: 2022/05/22 18:00:17 by eestelle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	choose_build_in_function(t_env **env, t_cmd *s, t_msh *msh, int flag)
@@ -46,6 +58,5 @@ int	check_if_build_in_or_null(t_env **env, t_cmd *s, t_msh *msh, int flag)
 			choose_build_in_function(env, s, msh, 0);
 		return (1);
 	}
-	else
-		return (0);
+	return (0);
 }

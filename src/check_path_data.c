@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_path_data.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eestelle <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/22 17:49:32 by eestelle          #+#    #+#             */
+/*   Updated: 2022/05/22 17:49:33 by eestelle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	data_dollar_question(t_list *cmd_data, int i, char *data)
@@ -5,9 +17,9 @@ int	data_dollar_question(t_list *cmd_data, int i, char *data)
 	char	*tmp1;
 	char	*tmp2;
 	char	*ret;
-	int	len;
+	int		len;
 
-	tmp1 = ft_substr(data, 0 , i - 1);
+	tmp1 = ft_substr(data, 0, i - 1);
 	ret = ft_itoa(g_return_code);
 	len = ft_strlen(ret);
 	tmp2 = ft_strjoin(tmp1, ret);
@@ -37,7 +49,7 @@ int	data_dollar_num(t_list *cmd_data, int i, char *data)
 
 char	*check_in_env(char *var, t_env *env)
 {
-	int	len;
+	int		len;
 	char	*new;
 
 	len = ft_strlen(var);
@@ -79,7 +91,7 @@ int	data_change_path(t_list *data, int i, char *str, t_env *env)
 	len = ft_strlen(new);
 	tmp2 = ft_strjoin(tmp, new);
 //	if (new)
-		free(new);
+	free(new);
 	free(tmp);
 //	free(data->content);
 	tmp = ft_strdup(str + i);
@@ -93,7 +105,7 @@ int	data_change_path(t_list *data, int i, char *str, t_env *env)
 int	check_path_data(t_list *cmd_data, int i, char *data, t_env *env)
 {
 	if (cmd_data->flag_not_change_dollars == 1)
-		return (check_path(i ,data));
+		return (check_path(i, data));
 	if (data[i] == '?')
 	{
 		i = data_dollar_question(cmd_data, i--, data);

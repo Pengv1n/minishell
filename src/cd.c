@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cd.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eestelle <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/22 17:45:26 by eestelle          #+#    #+#             */
+/*   Updated: 2022/05/22 17:45:29 by eestelle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static void	do_chdir(char *str)
@@ -10,7 +22,6 @@ static void	do_chdir(char *str)
 		fd = open(str, O_DIRECTORY);
 		ft_putstr_fd("minishell: cd: ", 2);
 		ft_putstr_fd(str, 2);
-
 		if (access(str, 0) < 0)
 			ft_putendl_fd(": No such file or directory", 2);
 		else if (fd < 0)
@@ -40,12 +51,12 @@ char	*get_address(void)
 	return (buf);
 }
 
-static void cd_back(char *pwd)
+static void	cd_back(char *pwd)
 {
 	char	*buf;
 	char	*last;
 	char	*prev;
-	int	flag;
+	int		flag;
 
 	flag = 0;
 	buf = get_address();
@@ -66,9 +77,9 @@ static void cd_back(char *pwd)
 
 void	cd_build_in(char **cmd, t_env *env, char *pwd)
 {
-	int	a;
+	int			a;
 	const char	str[] = "HOME=";
-	char	*home;
+	char		*home;
 
 	a = 0;
 	while (cmd[a])

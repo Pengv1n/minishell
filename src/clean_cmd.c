@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   clean_cmd.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eestelle <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/22 18:02:43 by eestelle          #+#    #+#             */
+/*   Updated: 2022/05/22 18:02:52 by eestelle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-int	delete_one_quote(t_list *cmd_data, int i, char  *data)
+int	delete_one_quote(t_list *cmd_data, int i, char *data)
 {
-	int	j;
+	int		j;
 	char	*tmp1;
 	char	*tmp2;
 	char	*new;
@@ -81,7 +93,7 @@ int	delete_two_quote(t_list *cmd_data, int i, char *data, t_env *env)
 void	check_arg(t_list *cmd_data, t_env *env)
 {
 	char	*data;
-	int	i;
+	int		i;
 
 	i = 0;
 	data = cmd_data->content;

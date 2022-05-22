@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_if_path_not_expand.c                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eestelle <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/22 17:46:29 by eestelle          #+#    #+#             */
+/*   Updated: 2022/05/22 17:46:30 by eestelle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	check_path(int i, char *str)
@@ -32,7 +44,7 @@ void	check_if_change(t_list **cmd_data, t_env *env)
 	{
 		next_op = (*cmd_data)->next->content;
 		if ((!ft_strncmp(op, ">", 2) || !ft_strncmp(op, "<", 2)
-			 || !ft_strncmp(op, ">>", 3)) && next_op[0] == '$')
+				|| !ft_strncmp(op, ">>", 3)) && next_op[0] == '$')
 		{
 			if (ft_strlen(next_op) > 1 && check_path(0, next_op + 1) > 0)
 				check_cmd(cmd_data, env);

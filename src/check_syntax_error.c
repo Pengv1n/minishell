@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_syntax_error.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eestelle <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/22 17:58:43 by eestelle          #+#    #+#             */
+/*   Updated: 2022/05/22 17:58:45 by eestelle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	check_only_redirect_pipe(t_list *cmd_data)
 {
 	char	*tmp;
-	int	len;
-	int	i;
+	int		len;
+	int		i;
 
 	i = 0;
 	tmp = cmd_data->content;
@@ -32,7 +44,7 @@ int	print_redirect_error(char c)
 int	case_error_redirect(t_list *cmd_data)
 {
 	char	*tmp;
-	int	len;
+	int		len;
 
 	tmp = cmd_data->content;
 	len = ft_strlen(tmp);
