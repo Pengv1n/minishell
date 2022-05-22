@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eestelle </var/spool/mail/eestelle>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/22 23:51:25 by eestelle          #+#    #+#             */
+/*   Updated: 2022/05/22 23:51:27 by eestelle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	data_is_pipe(t_list *cmd_data)
@@ -9,7 +21,7 @@ int	data_is_pipe(t_list *cmd_data)
 
 char	*create_hd(const char *str)
 {
-	int	num;
+	int		num;
 	char	*number;
 	char	*new_str;
 
@@ -65,7 +77,8 @@ void	child_proc_heredoc(t_list *cmd_data, int save, t_cmd *s)
 	while (1)
 	{
 		cmd = readline("> ");
-		if (!ft_strncmp(cmd, cmd_data->content, ft_strlen(cmd_data->content) + 1))
+		if (!ft_strncmp(cmd, cmd_data->content,
+				ft_strlen(cmd_data->content) + 1))
 			break ;
 		if (save)
 		{
@@ -106,9 +119,10 @@ int	check_if_saved_in(t_list *cmd_data)
 {
 	while (cmd_data)
 	{
-		if ((!ft_strncmp(cmd_data->content, "<", 2) && !cmd_data->flag_in_quotes)
+		if ((!ft_strncmp(cmd_data->content, "<", 2)
+				&& !cmd_data->flag_in_quotes)
 			|| (!ft_strncmp(cmd_data->content, "<<", 3)
-			&& !cmd_data->flag_in_quotes))
+				&& !cmd_data->flag_in_quotes))
 			return (0);
 		if (data_is_pipe(cmd_data))
 			return (1);
@@ -127,7 +141,8 @@ void	heredoc(t_list *cmd_data, t_cmd *s)
 {
 	while (cmd_data)
 	{
-		if (!ft_strncmp(cmd_data->content, "<<", 3) && !cmd_data->flag_in_quotes)
+		if (!ft_strncmp(cmd_data->content, "<<", 3)
+			&& !cmd_data->flag_in_quotes)
 			cmd_data = check_type_readline(cmd_data->next, s);
 		else
 			cmd_data = cmd_data->next;

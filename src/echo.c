@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   echo.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eestelle </var/spool/mail/eestelle>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/23 00:08:39 by eestelle          #+#    #+#             */
+/*   Updated: 2022/05/23 00:08:40 by eestelle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	for_echo(char **command, int a, int *flag)
@@ -15,8 +27,8 @@ int	for_echo(char **command, int a, int *flag)
 void	echo_build_in(t_cmd *s)
 {
 	char	**command;
-	int	a;
-	int	flag;
+	int		a;
+	int		flag;
 
 	flag = 0;
 	command = s->cmd;

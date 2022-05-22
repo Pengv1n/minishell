@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_cmd_struct.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eestelle </var/spool/mail/eestelle>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/22 23:53:02 by eestelle          #+#    #+#             */
+/*   Updated: 2022/05/22 23:53:03 by eestelle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	check_pipe_amount_list(t_list *cmd_data)
@@ -58,7 +70,7 @@ t_cmd	*list_cmd_new(int num)
 int	init_cmd_struct(t_list *cmd_data, t_cmd **s, t_msh *msh)
 {
 	int	amount;
-	int i;
+	int	i;
 
 	i = 0;
 	amount = check_pipe_amount_list(cmd_data);

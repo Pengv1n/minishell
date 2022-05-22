@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eestelle </var/spool/mail/eestelle>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/23 00:07:46 by eestelle          #+#    #+#             */
+/*   Updated: 2022/05/23 00:07:47 by eestelle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 #include "stdio.h"
 
@@ -19,14 +31,15 @@ void	free_msh(t_msh *msh)
 {
 	if (msh)
 	{
-		if (msh->pwd) {
+		if (msh->pwd)
+		{
 			free(msh->pwd);
 			msh->pwd = NULL;
 		}
 		if (msh->old_pwd)
 		{
 			free(msh->old_pwd);
-			msh->old_pwd =NULL;
+			msh->old_pwd = NULL;
 		}
 		free(msh);
 		msh = NULL;
@@ -45,7 +58,7 @@ t_env	*find_env(t_env *env, char *data)
 	while (env)
 	{
 		if (!ft_strncmp(data, env->data, len)
-		&& (env->data[len] == '=' || !env->data[len]))
+			&& (env->data[len] == '=' || !env->data[len]))
 			return (env);
 		env = env->next;
 	}
@@ -55,7 +68,7 @@ t_env	*find_env(t_env *env, char *data)
 void	edit_env(t_env **env)
 {
 	t_env	*f_env;
-	int	n;
+	int		n;
 	char	*str_n;
 
 	f_env = find_env(*env, "SHLVL=");
@@ -112,8 +125,8 @@ void	handler_command(t_msh *msh, t_env **env)
 int	main(int argc, char **argv, char **envm)
 {
 	t_env	*env;
-//	t_env	*tmp;
 	t_msh	*msh;
+//	t_env	*tmp;
 
 	msh = (t_msh *) malloc(sizeof(t_msh));
 	if (!msh)
@@ -126,7 +139,6 @@ int	main(int argc, char **argv, char **envm)
 		sig_msh();
 		handler_command(msh, &env);
 	}
-
 //	rl_clear_history();
 	free_env(env);
 	free_msh(msh);

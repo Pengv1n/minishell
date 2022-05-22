@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eestelle </var/spool/mail/eestelle>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/22 23:56:44 by eestelle          #+#    #+#             */
+/*   Updated: 2022/05/22 23:56:45 by eestelle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	print_export_data(char **data, t_cmd *s)
 {
-	int	a;
-	int	len;
+	int		a;
+	int		len;
 	char	*key;
 
 	a = 0;
@@ -30,8 +42,8 @@ void	sort_export_data(t_env *env, t_cmd *s)
 {
 	char	**data;
 	char	*temp;
-	int	a;
-	int	b;
+	int		a;
+	int		b;
 
 	data = build_envp(env);
 	a = 0;

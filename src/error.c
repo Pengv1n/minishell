@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eestelle </var/spool/mail/eestelle>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/23 00:04:22 by eestelle          #+#    #+#             */
+/*   Updated: 2022/05/23 00:05:11 by eestelle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	error(int n, char *str)
@@ -13,10 +25,10 @@ void	error(int n, char *str)
 	}
 	else if (n == 2)
 	{
+		g_return_code = 127;
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(str, 2);
 		ft_putstr_fd(": command not found\n", 2);
-		g_return_code = 	127;
 		exit(127);
 	}
 	exit(EXIT_FAILURE);
@@ -37,6 +49,5 @@ void	exit_minishell(void)
 {
 	if (WIFSIGNALED(g_return_code))
 		exit(1);
-	else
-		exit(EXIT_SUCCESS);
+	exit(EXIT_SUCCESS);
 }
