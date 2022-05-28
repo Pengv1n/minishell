@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   unset.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eestelle </var/spool/mail/eestelle>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/22 23:37:41 by eestelle          #+#    #+#             */
+/*   Updated: 2022/05/22 23:38:18 by eestelle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static void	next_env(t_env *orig, t_env *new)
@@ -7,7 +19,7 @@ static void	next_env(t_env *orig, t_env *new)
 	while (orig->next)
 	{
 		if (orig->next && !ft_strncmp(orig->next->data,
-									  new->data, ft_strlen(orig->next->data)))
+				new->data, ft_strlen(orig->next->data)))
 		{
 			last = orig->next;
 			orig->next = orig->next->next;
@@ -38,7 +50,7 @@ static t_env	*copy_env(t_env *env)
 void	unset_build_in(t_cmd *s, t_env **env)
 {
 	t_env	*new;
-	int	num;
+	int		num;
 
 	if (!(*env) || !(s->cmd[1]))
 		return ;
@@ -52,7 +64,7 @@ void	unset_build_in(t_cmd *s, t_env **env)
 		if (new)
 		{
 			if (!ft_strncmp((*env)->data, new->data,
-							ft_strlen((*env)->data)))
+					ft_strlen((*env)->data)))
 				*env = copy_env(*env);
 			else
 				next_env(*env, new);

@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex2.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eestelle </var/spool/mail/eestelle>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/22 23:46:38 by eestelle          #+#    #+#             */
+/*   Updated: 2022/05/22 23:46:40 by eestelle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 char	*check_commands(t_pipe *descriptor, char *cmd)
 {
 	char	*add_dir;
-	int	cnt;
+	int		cnt;
 
 	cnt = 0;
 	while (descriptor->path[cnt])
@@ -30,7 +42,7 @@ char	*add_slash(t_pipe *descriptor)
 {
 	char	**slash;
 	char	*add_slsh;
-	int	cnt;
+	int		cnt;
 
 	cnt = 0;
 	slash = NULL;
@@ -67,10 +79,10 @@ char	*no_path(t_pipe *descriptor, char **cmd)
 char	*add_dir(t_pipe *descriptor, char **cmd, char **envp)
 {
 	const char	str[] = "PATH=";
-	char	*dir;
-	char	*path;
-	char	*add_slsh;
-	int	cnt;
+	char		*dir;
+	char		*path;
+	char		*add_slsh;
+	int			cnt;
 
 	add_slsh = NULL;
 	path = NULL;

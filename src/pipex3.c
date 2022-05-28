@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex3.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eestelle </var/spool/mail/eestelle>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/22 23:39:12 by eestelle          #+#    #+#             */
+/*   Updated: 2022/05/22 23:39:13 by eestelle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	first_child(t_cmd *s, t_pipe *pipex)
@@ -70,7 +82,7 @@ void	do_process(t_cmd *s, t_msh *msh, t_pipe *pipex)
 
 void	child(t_pipe *pipex, t_cmd *s, t_msh *msh, t_env **env)
 {
-	int	num;
+	int		num;
 	char	**envp;
 
 	num = !check_if_build_in_or_null(env, s, msh, 0);

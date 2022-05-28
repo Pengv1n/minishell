@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   environment.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eestelle </var/spool/mail/eestelle>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/22 23:52:20 by eestelle          #+#    #+#             */
+/*   Updated: 2022/05/22 23:52:22 by eestelle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 t_env	*new_env(char *data)
@@ -63,7 +75,7 @@ int	size_env(t_env *env)
 
 t_env	*find_env_data(t_env *env, char *data)
 {
-	int len;
+	int	len;
 
 	if (ft_strchr(data, '='))
 		len = ft_strchr_len(data, '=');

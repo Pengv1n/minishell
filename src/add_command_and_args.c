@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   add_command_and_args.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eestelle <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/22 17:43:13 by eestelle          #+#    #+#             */
+/*   Updated: 2022/05/22 17:43:29 by eestelle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 t_list	*skip_error_process(t_list *cmd_data, t_cmd *s)
@@ -49,7 +61,7 @@ t_list	*skip_pipe_data(t_list *cmd_data, int amount, t_cmd *s)
 t_list	*made_massive_command(t_list *cmd_data, int amount, t_cmd *s)
 {
 	char	**command;
-	int	i;
+	int		i;
 
 	i = 0;
 	command = malloc(sizeof(char *) * (amount + 1));

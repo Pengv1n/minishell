@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eestelle </var/spool/mail/eestelle>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/23 00:09:40 by eestelle          #+#    #+#             */
+/*   Updated: 2022/05/23 00:09:41 by eestelle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	waitpid_and_return(t_pipe *pipex, int count)
@@ -49,7 +61,6 @@ void	check_fds(t_cmd *s)
 void	single_command(t_env **env, t_cmd *s, t_msh *msh, t_pipe *pipex)
 {
 	char	**envp;
-
 
 	if (check_if_build_in_or_null(env, s, msh, 1))
 		return ;

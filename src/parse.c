@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eestelle </var/spool/mail/eestelle>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/23 00:02:30 by eestelle          #+#    #+#             */
+/*   Updated: 2022/05/23 00:02:31 by eestelle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	check_type(char c)
@@ -42,11 +54,9 @@ char	*add_to_list(char *cmd, int i, t_list **data)
 	char	*new;
 
 	i_copy = i;
-//	printf("\n\n%s i = %i\n\n", cmd, i_copy);
 	if (!cmd[i])
 	{
 		ft_lstadd_back(data, ft_lstnew(ft_strdup(cmd)));
-//		printf("\n\n\n%s\n\n\n", ft_lstlast((*data))->content);
 		return (NULL);
 	}
 	if (cmd[i] == '|' || cmd[i] == '<' || cmd[i] == '>')
@@ -64,7 +74,7 @@ char	*add_to_list(char *cmd, int i, t_list **data)
 
 void	split_cmd(char *cmd, t_list **cmd_data)
 {
-	int	i;
+	int		i;
 	char	*tmp;
 
 	i = 0;
@@ -112,7 +122,7 @@ void	init_cmd_data(t_list *cmd_data)
 void	parse_command(char *command, t_msh *msh, t_env **env)
 {
 	t_list	*cmd_data;
-    t_cmd   *s;
+	t_cmd	*s;
 
 	cmd_data = NULL;
 	s = NULL;
@@ -122,15 +132,16 @@ void	parse_command(char *command, t_msh *msh, t_env **env)
 	init_cmd_data(cmd_data);
 	check_if_path_not_expand(cmd_data, *env);
 	clean_commands(cmd_data, *env);
-    if (check_syntax_error(cmd_data) || check_repited_redirect(cmd_data))
-    {
-        g_return_code = 258;
-        ft_lstclear(&cmd_data, (void *)free);
-        return ;
-    }
-    if (!init_cmd_struct(cmd_data, &s, msh))
-        return ;
-    fill_list_cmd_struct(cmd_data, s);
+	if (check_syntax_error(cmd_data)
+		|| check_repited_redirect(cmd_data))
+	{
+		g_return_code = 258;
+		ft_lstclear(&cmd_data, (void *)free);
+		return ;
+	}
+	if (!init_cmd_struct(cmd_data, &s, msh))
+		return ;
+	fill_list_cmd_struct(cmd_data, s);
 	pipex(s, msh, *env);
 	ft_lstclear(&cmd_data, (void *)free);
 	clear_list_cmd_struct(&s);

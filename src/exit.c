@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exit.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eestelle </var/spool/mail/eestelle>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/22 23:41:08 by eestelle          #+#    #+#             */
+/*   Updated: 2022/05/22 23:41:09 by eestelle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static int	ft_num(const char *s, int *flag, int min)
 {
-	unsigned long long int number;
+	unsigned long long int	number;
 
 	number = 0;
 	while (*s >= '0' && *s <= '9')
@@ -19,7 +31,7 @@ static int	ft_num(const char *s, int *flag, int min)
 static long long int	atoi_mod(char *str, int *flag)
 {
 	long long int	number;
-	int	min;
+	int				min;
 
 	min = 0;
 	while (*str == ' ' || (*str >= 9 && *str <= 13))
@@ -53,8 +65,8 @@ static void	print_error_exit(char *data)
 void	exit_build_in(t_cmd *s)
 {
 	long long int	num;
-	int	check;
-	int	flag;
+	int				check;
+	int				flag;
 
 	flag = 0;
 	if (s->num == 0)

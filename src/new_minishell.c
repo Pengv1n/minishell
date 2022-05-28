@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   new_minishell.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eestelle </var/spool/mail/eestelle>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/23 00:29:37 by eestelle          #+#    #+#             */
+/*   Updated: 2022/05/23 00:29:38 by eestelle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 char	**build_envp(t_env *env)
 {
 	char	**envp;
-	int	i;
+	int		i;
 
 	i = 0;
 	envp = malloc(sizeof(char *) * (size_env(env) + 1));
@@ -20,10 +32,10 @@ char	**build_envp(t_env *env)
 
 int	child_minishell(t_env *env)
 {
-	char	**data;
-	static char *path[] = {"minishell", NULL};
-	t_env	*pwd;
-	char	*min;
+	char		**data;
+	static char	*path[] = {"minishell", NULL};
+	t_env		*pwd;
+	char		*min;
 
 	data = build_envp(env);
 	pwd = find_env_data(env, "PWD=");

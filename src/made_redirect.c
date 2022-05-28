@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   made_redirect.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eestelle </var/spool/mail/eestelle>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/22 23:42:25 by eestelle          #+#    #+#             */
+/*   Updated: 2022/05/22 23:42:45 by eestelle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	data_redirect(t_list *cmd_data)
@@ -8,7 +20,7 @@ int	data_redirect(t_list *cmd_data)
 	if (cmd_data->flag_in_quotes)
 		return (0);
 	if (!ft_strncmp(tmp, ">", 2) || !ft_strncmp(tmp, "<", 2)
-			|| !ft_strncmp(tmp, ">>", 3))
+		|| !ft_strncmp(tmp, ">>", 3))
 		return (1);
 	return (0);
 }
@@ -29,9 +41,11 @@ t_list	*open_in_files(t_list *cmd_data, t_cmd *s)
 t_list	*open_out_files(t_list *cmd_data, t_cmd *s)
 {
 	if (!ft_strncmp(cmd_data->content, ">", 2))
-		s->out = open(cmd_data->next->content, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		s->out = open(cmd_data->next->content,
+				O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	else if (!ft_strncmp(cmd_data->content, ">>", 3))
-		s->out = open(cmd_data->next->content, O_WRONLY | O_CREAT | O_APPEND, 0644);
+		s->out = open(cmd_data->next->content,
+				O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (s->out < 0)
 	{
 		cmd_data = error_with_redirect(cmd_data, s);

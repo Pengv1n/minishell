@@ -6,7 +6,7 @@
 /*   By: aregenia <aregenia@student.21-school.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 01:40:15 by aregenia          #+#    #+#             */
-/*   Updated: 2021/10/14 16:36:33 by aregenia         ###   ########.fr       */
+/*   Updated: 2022/05/22 17:42:09 by eestelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@
 
 typedef struct s_list
 {
-	int	shlvl;
-	int	flag_not_change_dollars;
-	int	flag_in_quotes;
-	int	flag_ambitious_redirect;
-	char	*amb_data;
-	int	flag_dollar_expanded;
-	int	num;
+	int				shlvl;
+	int				flag_not_change_dollars;
+	int				flag_in_quotes;
+	int				flag_ambitious_redirect;
+	char			*amb_data;
+	int				flag_dollar_expanded;
+	int				num;
 	char			*content;
 	struct s_list	*next;
 }	t_list;
