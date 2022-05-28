@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eestelle </var/spool/mail/eestelle>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,35 +12,35 @@
 
 #include "minishell.h"
 
-void	change_data_in_list(t_env *env, char *data)
+void	free_env(t_env *env)
 {
-	free(env->data);
-	env->data = ft_strdup(data);
-}
+	t_env	*tmp;
 
-void	env_build_in(t_env *env, t_cmd *s)
-{
 	while (env)
 	{
-		if (ft_strrchr(env->data, '='))
+		if (env->data)
+			free(env->data);
+		tmp = env->next;
+		free(env);
+		env = tmp;
+	}
+}
+
+void	free_msh(t_msh *msh)
+{
+	if (msh)
+	{
+		if (msh->pwd)
 		{
-			ft_putstr_fd(env->data, s->out);
-			write(s->out, "\n", 1);
+			free(msh->pwd);
+			msh->pwd = NULL;
 		}
-		env = env->next;
+		if (msh->old_pwd)
+		{
+			free(msh->old_pwd);
+			msh->old_pwd = NULL;
+		}
+		free(msh);
+		msh = NULL;
 	}
-	g_return_code = 0;
-}
-
-int	size_env(t_env *env)
-{
-	int	ret;
-
-	ret = 0;
-	while (env)
-	{
-		env = env->next;
-		ret++;
-	}
-	return (ret);
 }

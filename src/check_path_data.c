@@ -69,10 +69,10 @@ char	*check_in_env(char *var, t_env *env)
 int	data_change_path(t_list *data, int i, char *str, t_env *env)
 {
 	int		start;
-	char	*tmp2;
 	char	*new;
 	char	*tmp;
 	int		len;
+	int		start_and_i[2];
 
 	start = i;
 	i = check_path(i, str);
@@ -87,18 +87,9 @@ int	data_change_path(t_list *data, int i, char *str, t_env *env)
 		data->content = ft_strdup("");
 		return (start - 1);
 	}
-	tmp = ft_substr(str, 0, start - 1);
-	len = ft_strlen(new);
-	tmp2 = ft_strjoin(tmp, new);
-//	if (new)
-	free(new);
-	free(tmp);
-//	free(data->content);
-	tmp = ft_strdup(str + i);
-	free(data->content);
-	data->content = ft_strjoin(tmp2, tmp);
-	free(tmp);
-	free(tmp2);
+	start_and_i[0] = start;
+	start_and_i[1] = i;
+	len = data_change_path_utils(str, start_and_i, new, data);
 	return (start + len - 1);
 }
 

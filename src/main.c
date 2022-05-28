@@ -13,39 +13,6 @@
 #include "minishell.h"
 #include "stdio.h"
 
-void	free_env(t_env *env)
-{
-	t_env	*tmp;
-
-	while (env)
-	{
-		if (env->data)
-			free(env->data);
-		tmp = env->next;
-		free(env);
-		env = tmp;
-	}
-}
-
-void	free_msh(t_msh *msh)
-{
-	if (msh)
-	{
-		if (msh->pwd)
-		{
-			free(msh->pwd);
-			msh->pwd = NULL;
-		}
-		if (msh->old_pwd)
-		{
-			free(msh->old_pwd);
-			msh->old_pwd = NULL;
-		}
-		free(msh);
-		msh = NULL;
-	}
-}
-
 t_env	*find_env(t_env *env, char *data)
 {
 	int	len;
@@ -83,12 +50,6 @@ void	edit_env(t_env **env)
 		f_env->data = ft_strjoin("SHLVL=", str_n);
 		free(str_n);
 	}
-//	f_env = find_env(*env, "OLDPWD=");
-//	if (f_env)
-//	{
-//		free(f_env->data);
-//		f_env->data = ft_strdup("OLDPWD");
-//	}
 }
 
 void	pwd(t_msh *msh, t_env *env)
@@ -126,8 +87,9 @@ int	main(int argc, char **argv, char **envm)
 {
 	t_env	*env;
 	t_msh	*msh;
-//	t_env	*tmp;
 
+	(void)argc;
+	(void)argv;
 	msh = (t_msh *) malloc(sizeof(t_msh));
 	if (!msh)
 		error_with_std_function(1);
@@ -139,7 +101,7 @@ int	main(int argc, char **argv, char **envm)
 		sig_msh();
 		handler_command(msh, &env);
 	}
-//	rl_clear_history();
+	rl_clear_history();
 	free_env(env);
 	free_msh(msh);
 	return (0);

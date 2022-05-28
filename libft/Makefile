@@ -62,8 +62,9 @@ $(NAME):
 	@$(RANLIB)
 
 bonus:
+	@$(COMPILE) $(SRC)
 	@$(COMPILE) $(SRC_BONUS)
-	@$(LIB) $(OBJ_BONUS)
+	@$(LIB) $(OBJ) $(OBJ_BONUS)
 	@$(RANLIB)
 
 clean:

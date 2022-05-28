@@ -35,7 +35,7 @@ static void	next_env(t_env *orig, t_env *new)
 	}
 }
 
-static t_env	*copy_env(t_env *env)
+t_env	*copy_env(t_env *env)
 {
 	t_env	*orig;
 
@@ -58,8 +58,7 @@ void	unset_build_in(t_cmd *s, t_env **env)
 	g_return_code = 0;
 	while (s->cmd[++num])
 	{
-		if (check_for_error_data(s->cmd[num], 'u'))
-			;
+		check_for_error_data(s->cmd[num], 'u');
 		new = find_env_data(*env, s->cmd[num]);
 		if (new)
 		{

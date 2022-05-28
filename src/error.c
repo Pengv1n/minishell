@@ -51,3 +51,24 @@ void	exit_minishell(void)
 		exit(1);
 	exit(EXIT_SUCCESS);
 }
+
+t_list	*error_ambitious_data(t_list *cmd_data, t_cmd *s)
+{
+	s->err = 1;
+	s->cmd = NULL;
+	printf("minishell: %s: ambiguous redirect\n", cmd_data->amb_data);
+	g_return_code = 1;
+	while (cmd_data && !data_is_pipe(cmd_data))
+		cmd_data = cmd_data->next;
+	return (cmd_data);
+}
+
+t_list	*error_with_redirect(t_list *cmd_data, t_cmd *s)
+{
+	printf("minishell: %s: %s\n", cmd_data->next->content, strerror(errno));
+	s->cmd = NULL;
+	s->err = 1;
+	while (cmd_data && !data_is_pipe(cmd_data))
+		cmd_data = cmd_data->next;
+	return (cmd_data);
+}

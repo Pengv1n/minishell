@@ -107,7 +107,6 @@ void			count_pipes(t_pipe *pipex, t_msh *msh);
 void			exit_minishell(void);
 void			add_command_and_args(t_list *cmd_data, t_cmd *s);
 int				data_redirect_and_heredoc(t_list *cmd_data);
-void			add_command_and_args(t_list *cmd_data, t_cmd *s);
 void			close_fd(int **fds);
 void			choose_build_in_function(t_env **env,
 					t_cmd *s, t_msh *msh, int flag);
@@ -120,10 +119,29 @@ void			export_build_in(t_env **env, t_cmd *s);
 int				check_if_str_num(char *data);
 void			exit_build_in(t_cmd *s);
 int				check_for_error_data(char *data, char c);
-static t_env	*copy_env(t_env *env);
+t_env			*copy_env(t_env *env);
 void			unset_build_in(t_cmd *s, t_env **env);
 void			cd_build_in(char **cmd, t_env *env, char *pwd);
 char			*get_address(void);
 void			change_env_pwds(t_msh *msh, t_env *env);
+int				data_change_path_utils(char *str, int *start_and_i,
+					char *new, t_list *data);
+int				check_type(char c);
+int				check_quote(char *cmd, int i, char quote);
+char			*split_spec_symbols(t_list **cmd_data, char *cmd, int i);
+char			*add_to_list(char *cmd, int i, t_list **data);
+void			split_cmd(char *cmd, t_list **cmd_data);
+char			*check_commands(t_pipe *descriptor, char *cmd);
+void			handler_sig(void);
+char			*do_change_path(t_list *cmd_data, char *data,
+					int *i, t_env *env);
+char			*create_hd(const char *str);
+void			open_file_for_heredoc(t_cmd *s);
+void			free_env(t_env *env);
+void			free_msh(t_msh *msh);
+void			waitpid_and_return(t_pipe *pipex, int count);
+void			first_child(t_cmd *s, t_pipe *pipex);
+void			middle_child(t_cmd *s, t_pipe *pipex);
+void			last_child(t_cmd *s, t_pipe *pipex);
 
 #endif

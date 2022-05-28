@@ -12,32 +12,6 @@
 
 #include "minishell.h"
 
-char	*check_commands(t_pipe *descriptor, char *cmd)
-{
-	char	*add_dir;
-	int		cnt;
-
-	cnt = 0;
-	while (descriptor->path[cnt])
-	{
-		add_dir = ft_strjoin(descriptor->path[cnt++], cmd);
-		if (access(add_dir, 0) == 0)
-		{
-			free_double_massive(descriptor->path);
-			free(cmd);
-			cmd = NULL;
-			return (add_dir);
-		}
-		free(add_dir);
-		add_dir = NULL;
-	}
-	free_double_massive(descriptor->path);
-	free(cmd);
-	cmd = NULL;
-	error(2, descriptor->cmd[0]);
-	return (NULL);
-}
-
 char	*add_slash(t_pipe *descriptor)
 {
 	char	**slash;
@@ -84,9 +58,6 @@ char	*add_dir(t_pipe *descriptor, char **cmd, char **envp)
 	char		*add_slsh;
 	int			cnt;
 
-	add_slsh = NULL;
-	path = NULL;
-	dir = NULL;
 	cnt = 0;
 	while (envp && envp[cnt] && ft_strncmp(str, envp[cnt], ft_strlen(str)))
 		cnt++;

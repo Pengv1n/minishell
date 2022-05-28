@@ -38,14 +38,6 @@ int	delete_one_quote(t_list *cmd_data, int i, char *data)
 	return (j + 1 - 2);
 }
 
-char	*do_change_path(t_list *cmd_data, char *data, int *i, t_env *env)
-{
-	*i = check_path_data(cmd_data, (++(*i)), data, env);
-	cmd_data->flag_dollar_expanded = 1;
-	data = cmd_data->content;
-	return (data);
-}
-
 int	del_two_quote(t_list *cmd_data, int start, char *data, int finish)
 {
 	char	*tmp1;

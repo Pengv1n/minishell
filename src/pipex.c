@@ -12,16 +12,6 @@
 
 #include "minishell.h"
 
-void	waitpid_and_return(t_pipe *pipex, int count)
-{
-	int	sig;
-
-	waitpid(pipex->pids[count], &sig, 0);
-	g_return_code = WEXITSTATUS(sig);
-	if (!g_return_code && WIFSIGNALED(sig))
-		g_return_code = 128 + WTERMSIG(sig);
-}
-
 void	multiple_commands(t_env **env, t_cmd *s, t_msh *msh, t_pipe *pipex)
 {
 	int	count;

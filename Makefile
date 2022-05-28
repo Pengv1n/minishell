@@ -18,6 +18,7 @@ SRC				=	add_command_and_args.c		\
 					check_syntax_error.c		\
 					choice_command.c			\
 					clean_cmd.c					\
+					clean_cmd_utils.c			\
 					echo.c						\
 					env.c						\
 					environment.c				\
@@ -25,19 +26,23 @@ SRC				=	add_command_and_args.c		\
 					exit.c						\
 					export.c					\
 					fill_list_cmd_struct.c		\
-					heredoc.c					\
+					heredoc1.c					\
+					heredoc2.c					\
 					list_cmd_struct.c			\
 					made_redirect.c				\
 					main.c						\
 					new_minishell.c				\
-					parse.c						\
+					parse1.c					\
+					parse2.c					\
 					pipex.c						\
 					pipex2.c					\
 					pipex3.c					\
 					pipex4.c					\
 					pwd.c						\
-					signal.c					\
+					signal1.c					\
+					signal2.c					\
 					unset.c						\
+					child.c						\
 					utils.c						\
 					utils_redirect.c
 
@@ -47,7 +52,7 @@ OBJ				=	$(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 .PHONY:	all clean fclean re
 
 all:	$(OBJ_DIR)
-	$(MAKE) -C $(LIBFT_DIR)
+	$(MAKE) -C $(LIBFT_DIR) bonus
 	$(MAKE) -j $(NAME)
 
 clean:
@@ -67,4 +72,4 @@ $(OBJ_DIR):
 	mkdir -p $@
 
 $(NAME):	$(OBJ) $(HEADER)
-	gcc $< -I libft -lft $(LIB) -o minishell
+	gcc $(OBJ) $(LIBFT_DIR)/$(LIBFT) $(LIB) -o minishell

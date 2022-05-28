@@ -12,64 +12,6 @@
 
 #include "minishell.h"
 
-void	first_child(t_cmd *s, t_pipe *pipex)
-{
-	if (s->in < 0)
-		error(1, NULL);
-	else if (s->in > 0)
-	{
-		if (dup2(s->in, STDIN_FILENO) < 0)
-			error(1, NULL);
-		close(s->in);
-	}
-	if (s->out > 1)
-	{
-		if (dup2(s->out, STDOUT_FILENO) < 0)
-			error(1, NULL);
-		close(s->out);
-	}
-	else if (dup2(pipex->fds[pipex->size][1], STDOUT_FILENO) < 0)
-		error(1, NULL);
-}
-
-void	middle_child(t_cmd *s, t_pipe *pipex)
-{
-	if (s->in > 0)
-	{
-		if (dup2(s->in, STDIN_FILENO) < 0)
-			error(1, NULL);
-		close(s->in);
-	}
-	else if (dup2(pipex->fds[pipex->size - 1][0], STDIN_FILENO) < 0)
-		error(1, NULL);
-	if (s->out > 1)
-	{
-		if (dup2(s->out, STDOUT_FILENO) < 0)
-			error(1, NULL);
-		close(s->out);
-	}
-	else if (dup2(pipex->fds[pipex->size][1], STDOUT_FILENO) < 0)
-		error(1, NULL);
-}
-
-void	last_child(t_cmd *s, t_pipe *pipex)
-{
-	if (s->in > 0)
-	{
-		if (dup2(s->in, STDIN_FILENO) < 0)
-			error(1, NULL);
-		close(s->in);
-	}
-	else if (dup2(pipex->fds[pipex->size - 1][0], STDIN_FILENO) < 0)
-		error(1, NULL);
-	if (s->out > 1)
-	{
-		if (dup2(s->out, STDOUT_FILENO) < 0)
-			error(1, NULL);
-		close(s->out);
-	}
-}
-
 void	do_process(t_cmd *s, t_msh *msh, t_pipe *pipex)
 {
 	if (pipex->size == 0)

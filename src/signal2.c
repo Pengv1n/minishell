@@ -1,46 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   signal1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eestelle </var/spool/mail/eestelle>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/22 23:55:54 by eestelle          #+#    #+#             */
-/*   Updated: 2022/05/22 23:55:55 by eestelle         ###   ########.fr       */
+/*   Created: 2022/05/23 00:08:06 by eestelle          #+#    #+#             */
+/*   Updated: 2022/05/23 00:08:08 by eestelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	change_data_in_list(t_env *env, char *data)
+void	handler_sig(void)
 {
-	free(env->data);
-	env->data = ft_strdup(data);
+	printf("\n");
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+	g_return_code = 1;
 }
 
-void	env_build_in(t_env *env, t_cmd *s)
+void	sig_msh(void)
 {
-	while (env)
-	{
-		if (ft_strrchr(env->data, '='))
-		{
-			ft_putstr_fd(env->data, s->out);
-			write(s->out, "\n", 1);
-		}
-		env = env->next;
-	}
-	g_return_code = 0;
+	rl_catch_signals = 0;
+	signal(SIGINT, (void *)handler_sig);
+	signal(SIGQUIT, SIG_IGN);
 }
 
-int	size_env(t_env *env)
+void	signal_for_heredoc(void)
 {
-	int	ret;
-
-	ret = 0;
-	while (env)
-	{
-		env = env->next;
-		ret++;
-	}
-	return (ret);
+	signal(SIGINT, (void *)handler_sig);
+	signal(SIGQUIT, SIG_IGN);
 }
